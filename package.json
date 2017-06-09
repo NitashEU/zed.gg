@@ -1,0 +1,15 @@
+{
+  "name": "zed.gg",
+  "description": "RiotApi wrapper in TypeScript",
+  "version": "1.0.0",
+  "private": false,
+  "author": {
+    "name": "Ferhat sayan"
+  },
+  "dependencies": {
+    "request": "^2.81.0"
+  },
+  "devDependencies": {
+    "@types/request": "0.0.43"
+  }
+}
