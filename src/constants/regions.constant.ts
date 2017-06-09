@@ -1,4 +1,4 @@
-const regions = {
+export const regions = {
   BRAZIL: 'br',
   EUROPE: 'eune',
   EUROPE_WEST: 'euw',
