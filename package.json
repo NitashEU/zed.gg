@@ -6,6 +6,10 @@
   "author": {
     "name": "Ferhat sayan"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NitashEU/zed.gg.git"
+  },
   "dependencies": {
     "request": "^2.81.0"
   },
