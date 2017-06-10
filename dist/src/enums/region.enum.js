@@ -1,4 +1,6 @@
-export var Region;
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var Region;
 (function (Region) {
     Region[Region["BRAZIL"] = 0] = "BRAZIL";
     Region[Region["EUROPE"] = 1] = "EUROPE";
@@ -11,5 +13,5 @@ export var Region;
     Region[Region["RUSSIA"] = 8] = "RUSSIA";
     Region[Region["TURKEY"] = 9] = "TURKEY";
     Region[Region["JAPAN"] = 10] = "JAPAN";
-})(Region || (Region = {}));
+})(Region = exports.Region || (exports.Region = {}));
 //# sourceMappingURL=region.enum.js.map

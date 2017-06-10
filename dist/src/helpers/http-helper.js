@@ -1,11 +1,13 @@
-export var HttpHelper;
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var HttpHelper;
 (function (HttpHelper) {
     function buildUrlWithOptions(url, options) {
-        Object.keys(options).forEach(key => {
-            url = url.replace(`{${key}}`, options[key]);
+        Object.keys(options).forEach(function (key) {
+            url = url.replace("{" + key + "}", options[key]);
         });
         return url;
     }
     HttpHelper.buildUrlWithOptions = buildUrlWithOptions;
-})(HttpHelper || (HttpHelper = {}));
+})(HttpHelper = exports.HttpHelper || (exports.HttpHelper = {}));
 //# sourceMappingURL=http-helper.js.map
