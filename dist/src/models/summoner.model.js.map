@@ -1,0 +1,1 @@
+{"version":3,"file":"summoner.model.js","sourceRoot":"","sources":["../../../src/models/summoner.model.ts"],"names":[],"mappings":"AAAA,MAAM;CAOL","sourcesContent":["export class Summoner {\r\n  public id: number;\r\n  public accountId: number;\r\n  public name: string;\r\n  public summonerLevel: number;\r\n  public profileIconId: number;\r\n  public revisionDate: Date;\r\n}"]}
