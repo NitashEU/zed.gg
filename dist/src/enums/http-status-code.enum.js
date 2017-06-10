@@ -1,4 +1,6 @@
-export var HttpStatusCode;
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var HttpStatusCode;
 (function (HttpStatusCode) {
     HttpStatusCode[HttpStatusCode["CONTINUE"] = 100] = "CONTINUE";
     HttpStatusCode[HttpStatusCode["SWITCHING_PROTOCOLS"] = 101] = "SWITCHING_PROTOCOLS";
@@ -55,5 +57,5 @@ export var HttpStatusCode;
     HttpStatusCode[HttpStatusCode["BANDWIDTH_LIMIT_EXCEEDED"] = 509] = "BANDWIDTH_LIMIT_EXCEEDED";
     HttpStatusCode[HttpStatusCode["NOT_EXTENDED"] = 510] = "NOT_EXTENDED";
     HttpStatusCode[HttpStatusCode["NETWORK_AUTHENTICATION_REQUIRED"] = 511] = "NETWORK_AUTHENTICATION_REQUIRED";
-})(HttpStatusCode || (HttpStatusCode = {}));
+})(HttpStatusCode = exports.HttpStatusCode || (exports.HttpStatusCode = {}));
 //# sourceMappingURL=http-status-code.enum.js.map
