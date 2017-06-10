@@ -32,6 +32,10 @@ bower_components
 
 # Compiled binary addons (http://nodejs.org/api/addons.html)
 build/Release
+dist/
+
+# Package testing directory
+src/test/
 
 # Dependency directories
 node_modules/
