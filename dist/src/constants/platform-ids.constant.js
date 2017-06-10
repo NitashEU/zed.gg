@@ -1,4 +1,6 @@
-export const platformIds = {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.platformIds = {
     BRAZIL: 'BR1',
     EUROPE: 'EUN1',
     EUROPE_WEST: 'EUW1',
