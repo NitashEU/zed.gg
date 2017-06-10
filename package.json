@@ -3,6 +3,7 @@
   "description": "RiotApi wrapper in TypeScript",
   "version": "1.0.0",
   "private": false,
+  "license": "MIT",
   "author": {
     "name": "Ferhat sayan"
   },
