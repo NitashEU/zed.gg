@@ -2,10 +2,13 @@
   "compileOnSave": true,
   "compilerOptions": {
     "target": "es6",
-    "noImplicitAny": false,
+    "stripInternal": true,
+    "strictNullChecks": true,
     "outDir": "dist",
     "rootDir": ".",
-    "sourceMap": true
+    "declaration": true,
+    "sourceMap": true,
+    "inlineSources": true
   },
   "include": [
     "src/**/*"
