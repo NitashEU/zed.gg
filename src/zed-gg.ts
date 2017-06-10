@@ -5,6 +5,7 @@ import { Endpoints } from './endpoints';
 import { HttpHelper } from './helpers/http-helper';
 import { HttpStatusCode } from './enums/http-status-code.enum';
 import { RateLimit } from './rate-limit/rate-limit';
+import { RateLimiter } from './rate-limit/rate-limiter';
 import { Region } from './enums/region.enum';
 import { Requester } from './helpers/requester';
 import { Serializer } from './helpers/serializer';
@@ -14,18 +15,17 @@ import { platformIds } from './constants/platform-ids.constant';
 
 export class ZedGG {
   private requester: Requester;
+  private rateLimiter: RateLimiter;
   private region: Region;
   private apiKey: string;
-  private rateLimits: RateLimit[];
 
   constructor(region: Region, apiKey: string)
   constructor(region: Region, apiKey: string, rateLimits: RateLimit[])
   constructor(region: Region, apiKey: string, rateLimits?: RateLimit[]) {
     this.region = region;
     this.apiKey = apiKey;
-    this.rateLimits = !rateLimits
-      ? [new RateLimit(10, 10), new RateLimit(600, 500)]
-      : rateLimits;
+
+    this.rateLimiter = new RateLimiter(rateLimits);
 
     this.defineDefaultRequestOptions();
   }
@@ -57,18 +57,23 @@ export class ZedGG {
     }
 
     try {
+      await this.rateLimiter.waitAll();
       let result = await this.requester.get(urlAndConstructor.url);
+      this.handleResponse(result.date, result.statusCode, result.headers);
       return Serializer.deserialize(urlAndConstructor.classConstructor, result.body);
     }
     catch (ex) {
-      let rex = ex as CustomResponseException;
-      this.handleResponse(rex.statusCode, rex.headers);
-      throw rex;
+      if (ex instanceof CustomResponseException) {
+        let rex = ex as CustomResponseException;
+        this.handleResponse(rex.date, rex.statusCode, rex.headers);
+        throw rex;
+      }
+      throw ex;
     }
   }
 
-  private handleResponse(statusCode: HttpStatusCode, headers: { key: string, value: string }[]): void {
-
+  private handleResponse(date: Date, statusCode: HttpStatusCode, headers: { key: string, value: string }[]): void {
+    this.rateLimiter.adjustToHeader(date, headers);
   }
 
   public summoners = {
