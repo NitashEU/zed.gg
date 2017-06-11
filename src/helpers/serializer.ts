@@ -20,14 +20,14 @@ export namespace Serializer {
 
       if (Array.isArray(json[prop])) {
         instance[prop] = (json[prop] as Array<any>).map(v => {
-          if (typeof v === 'object') {
+          if (typeof v === 'object' && type !== undefined) {
             return pDeserialize(type, v, true);
           } else {
             return v;
           }
         })
       }
-      else if (typeof json[prop] === 'object') {
+      else if (typeof json[prop] === 'object' && type !== undefined) {
         instance[prop] = deserialize(type, json[prop]);
       } else {
         instance[prop] = json[prop];
