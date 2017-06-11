@@ -1,1 +1,0 @@
-{"version":3,"file":"serializer.js","sourceRoot":"","sources":["../../../src/helpers/serializer.ts"],"names":[],"mappings":";;AAAA,IAAiB,UAAU,CAI1B;AAJD,WAAiB,UAAU;IACzB,qBAA+B,gBAA6B,EAAE,IAAY;QACxE,MAAM,CAAC,MAAM,CAAC,MAAM,CAAC,IAAI,gBAAgB,EAAE,EAAE,IAAI,CAAC,KAAK,CAAC,IAAI,CAAC,CAAC,CAAC;IACjE,CAAC;IAFe,sBAAW,cAE1B,CAAA;AACH,CAAC,EAJgB,UAAU,GAAV,kBAAU,KAAV,kBAAU,QAI1B"}

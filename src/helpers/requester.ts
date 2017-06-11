@@ -1,8 +1,8 @@
 import * as request from 'request';
 
-import { CustomResponse } from './../models/custom-response.model';
-import { CustomResponseException } from './../models/custom-response-exception.model';
-import { HttpStatusCode } from './../enums/http-status-code.enum'
+import { CustomResponse, CustomResponseException } from './../models';
+
+import { HttpStatusCode } from './../enums'
 
 export class Requester {
   private baseRequest: request.RequestAPI<request.Request, request.CoreOptions, request.RequiredUriUrl>;
@@ -20,8 +20,9 @@ export class Requester {
     let date = new Date();
     return new Promise<CustomResponse>((resolve, reject) => {
       this.baseRequest.get(url, options, (err, data) => {
+        let path = (data.request as any).path;
         if (err || (!!data.statusCode && data.statusCode >= 400)) {
-          reject(new CustomResponseException(this.baseOptions.baseUrl + url, date, data.statusCode as HttpStatusCode, data.headers));
+          reject(new CustomResponseException(this.baseOptions.baseUrl + path, date, data.statusCode as HttpStatusCode, data.headers));
         }
         else {
           resolve(new CustomResponse(data.body, date, data.statusCode as HttpStatusCode, data.headers));
