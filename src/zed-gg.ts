@@ -41,13 +41,6 @@ export class ZedGG {
     this.requester = new Requester(options);
   }
 
-  private async getSummonerBySummonerName(summonerName: string): Promise<Summoner> {
-    let result = await this.request(Endpoints.Summoners.bySummonerName, {
-      summonerName
-    });
-    return result;
-  }
-
   private async request<T>(urlAndConstructor: UrlAndConstructor<T>): Promise<T>
   private async request<T>(urlAndConstructor: UrlAndConstructor<T>, ...params: any[]): Promise<T>
   private async request<T>(urlAndConstructor: UrlAndConstructor<T>, options: any): Promise<T>
@@ -76,9 +69,36 @@ export class ZedGG {
     this.rateLimiter.adjustToHeader(date, headers);
   }
 
+  /* BEGIN REQUESTS */
+  private async getSummonerByAccountId(accountId: number): Promise<Summoner> {
+    let result = await this.request(Endpoints.Summoners.byAccountId, {
+      accountId
+    });
+    return result;
+  }
+
+  private async getSummonerBySummonerName(summonerName: string): Promise<Summoner> {
+    let result = await this.request(Endpoints.Summoners.bySummonerName, {
+      summonerName
+    });
+    return result;
+  }
+
+  private async getSummonerBySummonerId(summonerId: number): Promise<Summoner> {
+    let result = await this.request(Endpoints.Summoners.bySummonerId, {
+      summonerId
+    });
+    return result;
+  }
+  /* END REQUESTS */
+
+  /* BEGIN DEFINITIONS */
   public summoners = {
     by: {
-      name: this.getSummonerBySummonerName.bind(this)
+      accountId: this.getSummonerByAccountId.bind(this),
+      name: this.getSummonerBySummonerName.bind(this),
+      summonerId: this.getSummonerBySummonerId.bind(this)
     }
   }
+  /* END DEFINITIONS */
 } 
