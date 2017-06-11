@@ -20,8 +20,9 @@ export class Requester {
     let date = new Date();
     return new Promise<CustomResponse>((resolve, reject) => {
       this.baseRequest.get(url, options, (err, data) => {
+        let path = (data.request as any).path;
         if (err || (!!data.statusCode && data.statusCode >= 400)) {
-          reject(new CustomResponseException(this.baseOptions.baseUrl + url, date, data.statusCode as HttpStatusCode, data.headers));
+          reject(new CustomResponseException(this.baseOptions.baseUrl + path, date, data.statusCode as HttpStatusCode, data.headers));
         }
         else {
           resolve(new CustomResponse(data.body, date, data.statusCode as HttpStatusCode, data.headers));
