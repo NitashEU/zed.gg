@@ -62,7 +62,7 @@ export class ZedGG {
     }
   }
 
-  private handleResponse(date: Date, statusCode: HttpStatusCode, headers: { key: string, value: string }[]): void {
+  private handleResponse(date: Date, statusCode: HttpStatusCode, headers: Headers): void {
     this.rateLimiter.adjustToHeader(date, headers);
   }
 
