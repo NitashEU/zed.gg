@@ -20,9 +20,7 @@ export class ZedGG {
   private region: Region;
   private apiKey: string;
 
-  constructor(region: Region, apiKey: string)
-  constructor(region: Region, apiKey: string, rateLimits: RateLimit[])
-  constructor(region: Region, apiKey: string, rateLimits?: RateLimit[]) {
+  constructor(region: Region, apiKey: string, ...rateLimits: RateLimit[]) {
     this.region = region;
     this.apiKey = apiKey;
 
@@ -42,17 +40,20 @@ export class ZedGG {
     this.requester = new Requester(options);
   }
 
-  private async request<T>(urlAndConstructor: UrlAndConstructor<T>): Promise<T>
-  private async request<T>(urlAndConstructor: UrlAndConstructor<T>, ...params: any[]): Promise<T>
-  private async request<T>(urlAndConstructor: UrlAndConstructor<T>, options: any): Promise<T>
-  private async request<T>(urlAndConstructor: UrlAndConstructor<T>, options?: any, ...params: any[]): Promise<T> {
+  private async request<T>(urlAndConstructor: UrlAndConstructor<T>, options?: any, requestOptions?: RequestOptions): Promise<T> {
     if (!!options) {
       urlAndConstructor.url = HttpHelper.buildUrlWithOptions(urlAndConstructor.url, options);
     }
 
+    let qs = !requestOptions
+      ? {}
+      : requestOptions.getRiotOptions();
+
     try {
       await this.rateLimiter.waitAll();
-      let result = await this.requester.get(urlAndConstructor.url);
+      let result = await this.requester.get(urlAndConstructor.url, {
+        qs
+      });
       this.handleResponse(result.date, result.statusCode, result.headers);
       return Serializer.deserialize(urlAndConstructor.classConstructor, result.body);
     }
@@ -92,10 +93,10 @@ export class ZedGG {
     return result;
   }
 
-  private getMatchlistByAccountId = async (accountId: number): Promise<Matchlist> => {
+  private getMatchlistByAccountId = async (accountId: number, requestOptions?: MatchlistByAccountIdOptions): Promise<Matchlist> => {
     let result = await this.request(Endpoints.Matchlists.byAccountId, {
       accountId
-    });
+    }, requestOptions);
     return result;
   }
   /* END REQUESTS */
