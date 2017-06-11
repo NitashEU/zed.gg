@@ -9,5 +9,16 @@ export const platformIds = {
   OCEANIA: 'OC1',
   RUSSIA: 'RU',
   TURKEY: 'TR1',
-  JAPAN: 'JP1'
+  JAPAN: 'JP1',
+  BR1: 'BRAZIL',
+  EUN1: 'EUROPE',
+  EUW1: 'EUROPE_WEST',
+  KR: 'KOREA',
+  LA1: 'LATIN_AMERICA_NORTH',
+  LA2: 'LATIN_AMERICA_SOUTH',
+  NA1: 'NORTH_AMERICA',
+  OC1: 'OCEANIA',
+  RU: 'RUSSIA',
+  TR1: 'TURKEY',
+  JP1: 'JAPAN'
 }

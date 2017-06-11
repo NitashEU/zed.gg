@@ -1,6 +1,6 @@
 import * as request from 'request';
 
-import { CustomResponseException, Matchlist, Summoner } from './models';
+import { CustomResponseException, Headers, Match, Matchlist, Summoner } from './models';
 import { HttpHelper, Requester, Serializer, UrlAndConstructor } from './helpers';
 import { HttpStatusCode, Region } from './enums';
 import { MatchlistByAccountIdOptions, RequestOptions } from './request-options';
@@ -88,6 +88,13 @@ export class ZedGG {
     return result;
   }
 
+  private getMatchByMatchId = async (matchId: number): Promise<Match> => {
+    let result = await this.request(Endpoints.Matches.byMatchId, {
+      matchId
+    });
+    return result;
+  }
+
   private getMatchlistByAccountId = async (accountId: number, requestOptions?: MatchlistByAccountIdOptions): Promise<Matchlist> => {
     let result = await this.request(Endpoints.Matchlists.byAccountId, {
       accountId
@@ -109,6 +116,12 @@ export class ZedGG {
       accountId: this.getSummonerByAccountId,
       name: this.getSummonerBySummonerName,
       summonerId: this.getSummonerBySummonerId
+    }
+  }
+
+  public matches = {
+    by: {
+      matchId: this.getMatchByMatchId
     }
   }
 

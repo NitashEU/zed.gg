@@ -1,5 +1,6 @@
 import { Matchlist, Summoner } from './models';
 
+import { Match } from './models/match.model';
 import { UrlAndConstructor } from './helpers';
 
 export namespace Endpoints { // TODO: Need to rework UrlAndConstructor creation
@@ -16,6 +17,9 @@ export namespace Endpoints { // TODO: Need to rework UrlAndConstructor creation
 
   export namespace Matches {
     const baseUrl = 'lol/match/v3/matches/';
+    const baseConstructor = Match;
+
+    export const byMatchId = new UrlAndConstructor(baseUrl + '{matchId}', baseConstructor);
   }
 
   export namespace Matchlists {
