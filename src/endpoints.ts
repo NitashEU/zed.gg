@@ -23,5 +23,6 @@ export namespace Endpoints { // TODO: Need to rework UrlAndConstructor creation
     const baseConstructor = Matchlist;
 
     export const byAccountId = new UrlAndConstructor(baseUrl + 'by-account/{accountId}', baseConstructor);
+    export const byAccountIdRecent = new UrlAndConstructor(baseUrl + 'by-account/{accountId}/recent', baseConstructor);
   }
 }

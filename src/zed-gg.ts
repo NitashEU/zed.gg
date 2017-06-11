@@ -94,6 +94,13 @@ export class ZedGG {
     }, requestOptions);
     return result;
   }
+
+  private getMatchlistByAccountIdRecent = async (accountId: number): Promise<Matchlist> => {
+    let result = await this.request(Endpoints.Matchlists.byAccountIdRecent, {
+      accountId
+    });
+    return result;
+  }
   /* END REQUESTS */
 
   /* BEGIN DEFINITIONS */
@@ -107,7 +114,8 @@ export class ZedGG {
 
   public matchlists = {
     by: {
-      accountId: this.getMatchlistByAccountId
+      accountId: this.getMatchlistByAccountId,
+      accountIdRecent: this.getMatchlistByAccountIdRecent
     }
   }
   /* END DEFINITIONS */
