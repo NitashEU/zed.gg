@@ -1,9 +1,8 @@
-import * as request from 'request';
-
 import { Mutex, MutexInterface } from 'async-mutex';
 
-import { RateLimit } from './rate-limit';
-import { rateLimitHeaders } from './../constants/rate-limit-headers.constant';
+import { Headers } from './../models';
+import { RateLimit } from '.';
+import { rateLimitHeaders } from './../constants';
 
 export class RateLimiter {
   private alreadyAdjustedOnce: boolean;
@@ -39,7 +38,7 @@ export class RateLimiter {
     }
   }
 
-  public adjustToHeader(date: Date, headers: request.Headers): void { // TODO: This is SO nasty!
+  public adjustToHeader(date: Date, headers: Headers): void { // TODO: This is SO nasty!
     let map = new Map();
     let limits = Object.keys(headers).filter(key => this.rateLimitHeaders.has(key.toLowerCase())).map(key => headers[key]);
     limits.forEach(gLimits => {
