@@ -2,8 +2,8 @@ import * as request from 'request';
 
 import { Mutex, MutexInterface } from 'async-mutex';
 
-import { RateLimit } from './rate-limit';
-import { rateLimitHeaders } from './../constants/rate-limit-headers.constant';
+import { RateLimit } from '.';
+import { rateLimitHeaders } from './../constants';
 
 export class RateLimiter {
   private alreadyAdjustedOnce: boolean;

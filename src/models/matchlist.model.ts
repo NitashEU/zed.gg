@@ -1,4 +1,4 @@
-import { Deserializable } from './deserializable.abstract';
+import { Deserializable } from '.';
 
 export class Matchlist extends Deserializable {
   public totalGames: number;

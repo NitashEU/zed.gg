@@ -1,6 +1,6 @@
-import { Matchlist } from './models/matchlist.model';
-import { Summoner } from './models/summoner.model';
-import { UrlAndConstructor } from './helpers/url-and-constructor';
+import { Matchlist, Summoner } from './models';
+
+import { UrlAndConstructor } from './helpers';
 
 export namespace Endpoints { // TODO: Need to rework UrlAndConstructor creation
   export const baseUrl = 'https://{platformId}.api.riotgames.com/'

@@ -1,8 +1,8 @@
 import * as request from 'request';
 
-import { CustomResponse } from './../models/custom-response.model';
-import { CustomResponseException } from './../models/custom-response-exception.model';
-import { HttpStatusCode } from './../enums/http-status-code.enum'
+import { CustomResponse, CustomResponseException } from './../models';
+
+import { HttpStatusCode } from './../enums'
 
 export class Requester {
   private baseRequest: request.RequestAPI<request.Request, request.CoreOptions, request.RequiredUriUrl>;

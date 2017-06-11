@@ -1,18 +1,13 @@
 import * as request from 'request';
 
-import { CustomResponseException } from './models/custom-response-exception.model';
-import { Endpoints } from './endpoints';
-import { HttpHelper } from './helpers/http-helper';
-import { HttpStatusCode } from './enums/http-status-code.enum';
-import { Matchlist } from './models/matchlist.model';
-import { RateLimit } from './rate-limit/rate-limit';
-import { RateLimiter } from './rate-limit/rate-limiter';
-import { Region } from './enums/region.enum';
-import { Requester } from './helpers/requester';
-import { Serializer } from './helpers/serializer';
-import { Summoner } from './models/summoner.model';
-import { UrlAndConstructor } from './helpers/url-and-constructor';
-import { platformIds } from './constants/platform-ids.constant';
+import { CustomResponseException, Matchlist, Summoner } from './models';
+import { HttpHelper, Requester, Serializer, UrlAndConstructor } from './helpers';
+import { HttpStatusCode, Region } from './enums';
+import { MatchlistByAccountIdOptions, RequestOptions } from './request-options';
+import { RateLimit, RateLimiter } from './rate-limit';
+
+import { Endpoints } from '.';
+import { platformIds } from './constants';
 
 export class ZedGG {
   private requester: Requester;
