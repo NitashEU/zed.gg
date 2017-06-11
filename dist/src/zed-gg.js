@@ -45,9 +45,13 @@ var serializer_1 = require("./helpers/serializer");
 var platform_ids_constant_1 = require("./constants/platform-ids.constant");
 var ZedGG = (function () {
     function ZedGG(region, apiKey, rateLimits) {
+        /* END REQUESTS */
+        /* BEGIN DEFINITIONS */
         this.summoners = {
             by: {
-                name: this.getSummonerBySummonerName.bind(this)
+                accountId: this.getSummonerByAccountId.bind(this),
+                name: this.getSummonerBySummonerName.bind(this),
+                summonerId: this.getSummonerBySummonerId.bind(this)
             }
         };
         this.region = region;
@@ -64,21 +68,6 @@ var ZedGG = (function () {
             headers: { 'X-Riot-Token': this.apiKey }
         };
         this.requester = new requester_1.Requester(options);
-    };
-    ZedGG.prototype.getSummonerBySummonerName = function (summonerName) {
-        return __awaiter(this, void 0, void 0, function () {
-            var result;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.request(endpoints_1.Endpoints.Summoners.bySummonerName, {
-                            summonerName: summonerName
-                        })];
-                    case 1:
-                        result = _a.sent();
-                        return [2 /*return*/, result];
-                }
-            });
-        });
     };
     ZedGG.prototype.request = function (urlAndConstructor, options) {
         var params = [];
@@ -119,6 +108,52 @@ var ZedGG = (function () {
     };
     ZedGG.prototype.handleResponse = function (date, statusCode, headers) {
         this.rateLimiter.adjustToHeader(date, headers);
+    };
+    /* BEGIN REQUESTS */
+    ZedGG.prototype.getSummonerByAccountId = function (accountId) {
+        return __awaiter(this, void 0, void 0, function () {
+            var result;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.request(endpoints_1.Endpoints.Summoners.byAccountId, {
+                            accountId: accountId
+                        })];
+                    case 1:
+                        result = _a.sent();
+                        return [2 /*return*/, result];
+                }
+            });
+        });
+    };
+    ZedGG.prototype.getSummonerBySummonerName = function (summonerName) {
+        return __awaiter(this, void 0, void 0, function () {
+            var result;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.request(endpoints_1.Endpoints.Summoners.bySummonerName, {
+                            summonerName: summonerName
+                        })];
+                    case 1:
+                        result = _a.sent();
+                        return [2 /*return*/, result];
+                }
+            });
+        });
+    };
+    ZedGG.prototype.getSummonerBySummonerId = function (summonerId) {
+        return __awaiter(this, void 0, void 0, function () {
+            var result;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.request(endpoints_1.Endpoints.Summoners.bySummonerId, {
+                            summonerId: summonerId
+                        })];
+                    case 1:
+                        result = _a.sent();
+                        return [2 /*return*/, result];
+                }
+            });
+        });
     };
     return ZedGG;
 }());
