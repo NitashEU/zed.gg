@@ -4,6 +4,7 @@ import { CustomResponseException } from './models/custom-response-exception.mode
 import { Endpoints } from './endpoints';
 import { HttpHelper } from './helpers/http-helper';
 import { HttpStatusCode } from './enums/http-status-code.enum';
+import { Matchlist } from './models/matchlist.model';
 import { RateLimit } from './rate-limit/rate-limit';
 import { RateLimiter } from './rate-limit/rate-limiter';
 import { Region } from './enums/region.enum';
@@ -70,23 +71,30 @@ export class ZedGG {
   }
 
   /* BEGIN REQUESTS */
-  private async getSummonerByAccountId(accountId: number): Promise<Summoner> {
+  private getSummonerByAccountId = async (accountId: number): Promise<Summoner> => {
     let result = await this.request(Endpoints.Summoners.byAccountId, {
       accountId
     });
     return result;
   }
 
-  private async getSummonerBySummonerName(summonerName: string): Promise<Summoner> {
+  private getSummonerBySummonerName = async (summonerName: string): Promise<Summoner> => {
     let result = await this.request(Endpoints.Summoners.bySummonerName, {
       summonerName
     });
     return result;
   }
 
-  private async getSummonerBySummonerId(summonerId: number): Promise<Summoner> {
+  private getSummonerBySummonerId = async (summonerId: number): Promise<Summoner> => {
     let result = await this.request(Endpoints.Summoners.bySummonerId, {
       summonerId
+    });
+    return result;
+  }
+
+  private getMatchlistByAccountId = async (accountId: number): Promise<Matchlist> => {
+    let result = await this.request(Endpoints.Matchlists.byAccountId, {
+      accountId
     });
     return result;
   }
@@ -95,9 +103,15 @@ export class ZedGG {
   /* BEGIN DEFINITIONS */
   public summoners = {
     by: {
-      accountId: this.getSummonerByAccountId.bind(this),
-      name: this.getSummonerBySummonerName.bind(this),
-      summonerId: this.getSummonerBySummonerId.bind(this)
+      accountId: this.getSummonerByAccountId,
+      name: this.getSummonerBySummonerName,
+      summonerId: this.getSummonerBySummonerId
+    }
+  }
+
+  public matchlists = {
+    by: {
+      accountId: this.getMatchlistByAccountId
     }
   }
   /* END DEFINITIONS */
