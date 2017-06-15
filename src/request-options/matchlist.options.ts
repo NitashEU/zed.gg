@@ -29,7 +29,6 @@ export class MatchlistByAccountIdOptions implements RequestOptions {
     if (!!this.endIndex)
       object['endIndex'] = this.endIndex;
 
-    console.log(object);
     return object;
   }
 }
