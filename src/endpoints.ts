@@ -9,7 +9,7 @@ export namespace Endpoints { // TODO: Need to rework UrlAndConstructor creation
     const baseUrl = 'lol/league/v3/leagues/';
     const baseConstructor = LeagueList;
 
-    export const bySummonerId = new UrlAndConstructor(baseUrl + 'by-summoner/{summonerId}', baseConstructor, true);
+    export const bySummonerId = new UrlAndConstructor(baseUrl + 'by-summoner/{summonerId}', baseConstructor);
   }
 
   export namespace Summoners {
