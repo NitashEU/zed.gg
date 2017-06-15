@@ -34,9 +34,6 @@ bower_components
 build/Release
 dist/
 
-# Package testing directory
-src/test/
-
 # Dependency directories
 node_modules/
 jspm_packages/
