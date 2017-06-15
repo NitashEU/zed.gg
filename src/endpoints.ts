@@ -1,10 +1,16 @@
-import { Matchlist, Summoner } from './models';
+import { LeagueList, Match, Matchlist, Summoner } from './models';
 
-import { Match } from './models/match.model';
 import { UrlAndConstructor } from './helpers';
 
 export namespace Endpoints { // TODO: Need to rework UrlAndConstructor creation
-  export const baseUrl = 'https://{platformId}.api.riotgames.com/'
+  export const baseUrl = 'https://{platformId}.api.riotgames.com'
+
+  export namespace Leagues {
+    const baseUrl = 'lol/league/v3/leagues/';
+    const baseConstructor = LeagueList;
+
+    export const bySummonerId = new UrlAndConstructor(baseUrl + 'by-summoner/{summonerId}', baseConstructor, true);
+  }
 
   export namespace Summoners {
     const baseUrl = 'lol/summoner/v3/summoners/';
