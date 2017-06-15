@@ -7,6 +7,7 @@ export class LeagueList {
   public name: string;
   @json(Converter.TierConverter)
   public tier: Tier;
+  @json(Converter.QueueConverter)
   public queue: Queue;
   @json(LeagueEntry)
   public entries: LeagueEntry[];
