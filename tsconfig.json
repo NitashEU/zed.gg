@@ -1,6 +1,7 @@
 {
   "compileOnSave": true,
   "compilerOptions": {
+    "experimentalDecorators": true,
     "target": "es5",
     "outDir": "dist",
     "rootDir": "src",
