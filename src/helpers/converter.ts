@@ -14,28 +14,28 @@ export namespace Converter {
   }
   export class TierCustomConverter extends CustomConverter<Tier> {
     protected fromJSON(v: string | number): Tier {
-      return isType(v, String)
+      return isType(v, 'string')
         ? Tier[v]
         : Tier[Tier[v]];
     }
   }
   export class QueueCustomConverter extends CustomConverter<Queue> {
     protected fromJSON(v: string | number): Queue {
-      return isType(v, String)
+      return isType(v, 'string')
         ? Queue[v]
         : Queue[Queue[v]];
     }
   }
   export class SeasonCustomConverter extends CustomConverter<Season> {
     protected fromJSON(v: string | number): Season {
-      return isType(v, String)
+      return isType(v, 'string')
         ? Season[v]
         : Season[Season[v]];
     }
   }
   export class LeagueMapCustomConverter extends CustomConverter<LeagueMap> {
     protected fromJSON(v: string | number): LeagueMap {
-      return isType(v, String)
+      return isType(v, 'string')
         ? LeagueMap[v]
         : LeagueMap[LeagueMap[v]];
     }

@@ -1,13 +1,12 @@
 {
   "name": "zed.gg",
   "description": "RiotApi wrapper in TypeScript",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "private": false,
   "license": "MIT",
   "scripts": {
     "pretest": "tsc",
-    "test": "mocha dist/test/**/*.js",
-    "dev-test-watch": "mocha-typescript-watch dist/test/**/*.js"
+    "test": "mocha dist/test/**/*.js"
   },
   "author": {
     "name": "Ferhat sayan"

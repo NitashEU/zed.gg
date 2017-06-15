@@ -1,6 +1,10 @@
 # zed.gg
 
-[![NPM](https://nodei.co/npm/zed.gg.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/zed.gg/)
+[![NPM](https://nodei.co/npm/zed.gg.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/zed.gg/) 
+
+[![Build Status](https://travis-ci.org/NitashEU/zed.gg.svg?branch=master)](https://travis-ci.org/NitashEU/zed.gg)
+
+`npm install zed.gg --save`
 
 Riot Api wrapper for Node.js written in typescript. RateLimit is handled with our built in logic and with the response headers (even async!). The first request is always sync, so we can adjust our RateLimit handler to the headers. `retry-after` case is not implemented yet.
 
@@ -46,6 +50,8 @@ zedGG.summoners.by.accountId(29987287).then(r => console.log(r));
 zedGG.summoners.by.summonerId(25837773).then(r => console.log(r));
 ```
 
+`zedGG.summoners.by.*` returns a [Summoner](#summoner)
+
 ## Matchlists
 ```typescript
 let matchlistByAccountIdOptions = new MatchlistByAccountIdOptions();
@@ -62,12 +68,76 @@ zedGG.matchlists.by.accountId(29987287, matchlistByAccountIdOptions).then(r => c
 zedGG.matchlists.by.accountIdRecent(29987287).then(r => console.log(r));
 ```
 
-## Matches
-Please note: The below examples are not complete yet. Only basic match infos are returned in the model.
+`zedGG.matchlists.by.*` returns [Matchlist](#matchlist)
 
+## Matches
 ```typescript
 zedGG.matches.by.matchId(3199845416).then(r => console.log(r));
 ```
 
+`zedGG.matches.by.matchId` returns a [Match](#match)
+
+## Leagues
+```typescript
+zedGG.leagues.by.summonerId(25837773).then(r => console.log(r));
+```
+
+`zedGG.leagues.by.summonerId` returns a [LeagueList](#leaguelist)
+
 # Notes
 This wrapper is far by perfect. We have a lot of work to do. In the coming week I will try to add as many endpoint requests as possible and better documentation.
+
+# Models
+There is a lot of models which are exported. Just download the package and explore them in TypeScript! :)
+
+## Summoner
+
+```typescript
+export declare class Summoner {
+    id: number;
+    accountId: number;
+    name: string;
+    summonerLevel: number;
+    profileIconId: number;
+    revisionDate: Date;
+}
+```
+## Matchlist
+
+```typescript
+export declare class Matchlist {
+    totalGames: number;
+    beginIndex: number;
+    endIndex: number;
+    matches: MatchReference[];
+}
+```
+
+## Match
+
+```typescript
+export declare class Match {
+    gameId: number;
+    season: Season;
+    queue: Queue;
+    region: Region;
+    gameVersion: string;
+    gameMode: string;
+    gameType: string;
+    map: LeagueMap;
+    gameDuration: number;
+    playedOn: Date;
+    matchTeams: MatchTeam[];
+}
+```
+
+## LeagueList
+
+```typescript
+export declare class LeagueList {
+    name: string;
+    tier: Tier;
+    queue: Queue;
+    entries: LeagueEntry[];
+}
+```
