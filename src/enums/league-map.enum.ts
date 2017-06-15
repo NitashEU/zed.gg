@@ -1,4 +1,4 @@
-export enum Map {
+export enum LeagueMap {
   SUMMONERS_RIFT_SUMMER = 1,
   SUMMONERS_RIFT_AUTUMN = 2,
   THE_PROVING_GROUNDS = 3,

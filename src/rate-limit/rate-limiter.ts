@@ -13,14 +13,14 @@ export class RateLimiter {
 
   private rateLimitHeaders = new Map();
 
-  constructor(rateLimits: RateLimit[]) {
-    this.rateLimits = !rateLimits
+  constructor(rateLimits?: RateLimit[]) {
+    this.rateLimits = !rateLimits || rateLimits.length < 1
       ? [new RateLimit(10, 10), new RateLimit(600, 500)]
       : rateLimits;
 
-    let tenSecRateLimit = this.rateLimits.filter(rl => rl.seconds === 10)[0];
+    let lowestRateLimit = this.rateLimits.sort((a, b) => a.seconds - b.seconds)[0];
 
-    this.rateLimits.push(new RateLimit(0.5, tenSecRateLimit.maximumCalls / 10));
+    this.rateLimits.push(new RateLimit(0.5, lowestRateLimit.maximumCalls / 10));
 
     rateLimitHeaders.forEach(rlh => {
       this.rateLimitHeaders.set(rlh.toLowerCase(), rlh.toLowerCase());
@@ -70,7 +70,7 @@ export class RateLimiter {
       });
     });
 
-    if (!this.alreadyAdjustedOnce) {
+    if (!this.alreadyAdjustedOnce && !!this.releaserForFirstAdjustment) {
       this.alreadyAdjustedOnce = true;
       this.releaserForFirstAdjustment();
     }

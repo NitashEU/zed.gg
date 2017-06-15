@@ -1,7 +1,9 @@
+import 'reflect-metadata'
+
 import * as request from 'request';
 
-import { CustomResponseException, Headers, Match, Matchlist, Summoner } from './models';
-import { HttpHelper, Requester, Serializer, UrlAndConstructor } from './helpers';
+import { CustomResponseException, Headers, LeagueList, Match, Matchlist, Summoner } from './models';
+import { HttpHelper, Requester, UrlAndConstructor, deserialize, deserializeArray } from './helpers';
 import { HttpStatusCode, Region } from './enums';
 import { MatchlistByAccountIdOptions, RequestOptions } from './request-options';
 import { RateLimit, RateLimiter } from './rate-limit';
@@ -35,7 +37,7 @@ export class ZedGG {
     this.requester = new Requester(options);
   }
 
-  private async request<T>(urlAndConstructor: UrlAndConstructor<T>, options?: any, requestOptions?: RequestOptions): Promise<T> {
+  private async requestSingle<T>(urlAndConstructor: UrlAndConstructor<T>, options?: any, requestOptions?: RequestOptions): Promise<T> {
     if (!!options) {
       urlAndConstructor.url = HttpHelper.buildUrlWithOptions(urlAndConstructor.url, options);
     }
@@ -50,7 +52,34 @@ export class ZedGG {
         qs
       });
       this.handleResponse(result.date, result.statusCode, result.headers);
-      return Serializer.deserialize(urlAndConstructor.classConstructor, result.body);
+      return deserialize(urlAndConstructor.classConstructor, JSON.parse(result.body));
+    }
+    catch (ex) {
+      if (ex instanceof CustomResponseException) {
+        let rex = ex as CustomResponseException;
+        this.handleResponse(rex.date, rex.statusCode, rex.headers);
+        throw rex;
+      }
+      throw ex;
+    }
+  }
+
+  private async requestMultiple<T>(urlAndConstructor: UrlAndConstructor<T>, options?: any, requestOptions?: RequestOptions): Promise<T[]> {
+    if (!!options) {
+      urlAndConstructor.url = HttpHelper.buildUrlWithOptions(urlAndConstructor.url, options);
+    }
+
+    let qs = !requestOptions
+      ? {}
+      : requestOptions.getRiotOptions();
+
+    try {
+      await this.rateLimiter.waitAll();
+      let result = await this.requester.get(urlAndConstructor.url, {
+        qs
+      });
+      this.handleResponse(result.date, result.statusCode, result.headers);
+      return deserializeArray(urlAndConstructor.classConstructor, JSON.parse(result.body));
     }
     catch (ex) {
       if (ex instanceof CustomResponseException) {
@@ -68,42 +97,49 @@ export class ZedGG {
 
   /* BEGIN REQUESTS */
   private getSummonerByAccountId = async (accountId: number): Promise<Summoner> => {
-    let result = await this.request(Endpoints.Summoners.byAccountId, {
+    let result = await this.requestSingle(Endpoints.Summoners.byAccountId, {
       accountId
     });
     return result;
   }
 
   private getSummonerBySummonerName = async (summonerName: string): Promise<Summoner> => {
-    let result = await this.request(Endpoints.Summoners.bySummonerName, {
+    let result = await this.requestSingle(Endpoints.Summoners.bySummonerName, {
       summonerName
     });
     return result;
   }
 
   private getSummonerBySummonerId = async (summonerId: number): Promise<Summoner> => {
-    let result = await this.request(Endpoints.Summoners.bySummonerId, {
+    let result = await this.requestSingle(Endpoints.Summoners.bySummonerId, {
+      summonerId
+    });
+    return result;
+  }
+
+  private getLeaguesBySummonerId = async (summonerId: number): Promise<LeagueList[]> => {
+    let result = await this.requestMultiple(Endpoints.Leagues.bySummonerId, {
       summonerId
     });
     return result;
   }
 
   private getMatchByMatchId = async (matchId: number): Promise<Match> => {
-    let result = await this.request(Endpoints.Matches.byMatchId, {
+    let result = await this.requestSingle(Endpoints.Matches.byMatchId, {
       matchId
     });
     return result;
   }
 
   private getMatchlistByAccountId = async (accountId: number, requestOptions?: MatchlistByAccountIdOptions): Promise<Matchlist> => {
-    let result = await this.request(Endpoints.Matchlists.byAccountId, {
+    let result = await this.requestSingle(Endpoints.Matchlists.byAccountId, {
       accountId
     }, requestOptions);
     return result;
   }
 
   private getMatchlistByAccountIdRecent = async (accountId: number): Promise<Matchlist> => {
-    let result = await this.request(Endpoints.Matchlists.byAccountIdRecent, {
+    let result = await this.requestSingle(Endpoints.Matchlists.byAccountIdRecent, {
       accountId
     });
     return result;
@@ -116,6 +152,12 @@ export class ZedGG {
       accountId: this.getSummonerByAccountId,
       name: this.getSummonerBySummonerName,
       summonerId: this.getSummonerBySummonerId
+    }
+  }
+
+  public leagues = {
+    by: {
+      summonerId: this.getLeaguesBySummonerId
     }
   }
 

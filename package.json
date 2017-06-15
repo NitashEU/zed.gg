@@ -1,9 +1,14 @@
 {
   "name": "zed.gg",
   "description": "RiotApi wrapper in TypeScript",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "private": false,
   "license": "MIT",
+  "scripts": {
+    "pretest": "tsc",
+    "test": "mocha dist/test/**/*.js",
+    "dev-test-watch": "mocha-typescript-watch dist/test/**/*.js"
+  },
   "author": {
     "name": "Ferhat sayan"
   },
@@ -12,11 +17,20 @@
     "url": "https://github.com/NitashEU/zed.gg.git"
   },
   "dependencies": {
+    "async": "^2.4.1",
     "async-mutex": "^0.1.1",
     "double-ended-queue": "^2.1.0-0",
+    "reflect-metadata": "^0.1.10",
     "request": "^2.81.0"
   },
   "devDependencies": {
-    "@types/request": "0.0.43"
+    "@types/async": "^2.0.40",
+    "@types/chai": "^4.0.0",
+    "@types/mocha": "^2.2.41",
+    "@types/reflect-metadata": "0.0.5",
+    "@types/request": "0.0.43",
+    "chai": "^4.0.2",
+    "mocha": "^3.4.2",
+    "mocha-typescript": "^1.1.4"
   }
 }

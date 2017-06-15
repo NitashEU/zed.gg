@@ -1,0 +1,10 @@
+export enum Tier {
+  UNRANKED,
+  BRONZE,
+  SILVER,
+  GOLD,
+  PLATINUM,
+  DIAMOND,
+  MASTER,
+  CHALLENGER
+}
