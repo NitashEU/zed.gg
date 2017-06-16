@@ -1,11 +1,11 @@
 import * as async from 'async';
 import * as chai from 'chai';
 
-import { RateLimit, RateLimiter } from '../../rate-limit';
+import { RateLimit, RateLimiter } from './../../rate-limit';
 import { slow, suite, test, timeout } from "mocha-typescript";
 
-import { asyncForEach } from '../../helpers/general';
-import { rateLimitHeaders } from '../../constants/rate-limit-headers.constant';
+import { asyncForEach } from './../../helpers/general';
+import { rateLimitHeaders } from './../../constants/rate-limit-headers.constant';
 
 @suite class RateLimiterTest {
   public static before() {
@@ -54,6 +54,15 @@ import { rateLimitHeaders } from '../../constants/rate-limit-headers.constant';
     ((rateLimiter as any).rateLimits[1] as RateLimit).maximumCalls.should.equal(randomMaximumCalls / 10, 'rateLimiter.ratelimits[1].maximumCalls');
   }
 
+  @test('noValidHeadersGiven -> should now throw error if headers is undefined, null or empty')
+  public async noValidHeadersGiven() {
+    let rateLimiter = new RateLimiter();
+    chai.expect(() => rateLimiter.adjustToHeader(new Date(), void 0)).to.not.throw();
+    chai.expect(() => rateLimiter.adjustToHeader(new Date(), undefined)).to.not.throw();
+    chai.expect(() => rateLimiter.adjustToHeader(new Date(), null)).to.not.throw();
+    chai.expect(() => rateLimiter.adjustToHeader(new Date(), {})).to.not.throw();
+  }
+
   @test('testLimitingDefault -> should run 15 seconds+ for 20 requests (buffer)', slow(15000), timeout(20000))
   public async testLimitingDefault() {
     let rateLimiter = new RateLimiter();
@@ -88,8 +97,8 @@ import { rateLimitHeaders } from '../../constants/rate-limit-headers.constant';
     result.should.above(15000, 'result: ' + result);
   }
 
-  @test('testLimitingHigh -> should run 11,6 seconds+ for 2000 requests (buffer) async', slow(11600), timeout(20000))
-  public async testLimitingHigh() {
+  @test('testLimitingHighAsync -> should run 11,6 seconds+ for 2000 requests (buffer) async', slow(11600), timeout(20000))
+  public async testLimitingHighAsync() {
     let rateLimiter = new RateLimiter([new RateLimit(10, 1500)]);
     let begin = new Date();
     await asyncForEach(new Array(2000), async () => {
