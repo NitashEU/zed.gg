@@ -1,5 +1,5 @@
 import { MatchReference } from '.';
-import { json } from '../../helpers';
+import { json } from './../../helpers';
 
 export class Matchlist {
   public totalGames: number;

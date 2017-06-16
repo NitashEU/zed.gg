@@ -156,6 +156,9 @@ export function deserialize<T extends IGenericObject>(classConstructor: new () =
     return void 0;
   }
 
+  if (isPrimitiveOrPrimitiveClass(classConstructor)) {
+    return json as T;
+  }
 
   if (!isType(json, 'object')) {
     return void 0;

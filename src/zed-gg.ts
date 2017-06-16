@@ -4,7 +4,7 @@ import * as request from 'request';
 
 import { CustomResponseException, Headers, LeagueList, Match, Matchlist, Summoner } from './models';
 import { HttpHelper, Requester, UrlAndConstructor, deserialize, deserializeArray } from './helpers';
-import { HttpStatusCode, Region } from './enums';
+import { HttpStatusCode, Queue, Region } from './enums';
 import { MatchlistByAccountIdOptions, RequestOptions } from './request-options';
 import { RateLimit, RateLimiter } from './rate-limit';
 
@@ -12,9 +12,9 @@ import { Endpoints } from '.';
 import { platformIds } from './constants';
 
 export class ZedGG {
+  public region: Region;
   private requester: Requester;
   private rateLimiter: RateLimiter;
-  private region: Region;
   private apiKey: string;
 
   constructor(region: Region, apiKey: string, ...rateLimits: RateLimit[]) {
@@ -38,8 +38,9 @@ export class ZedGG {
   }
 
   private async requestSingle<T>(urlAndConstructor: UrlAndConstructor<T>, options?: any, requestOptions?: RequestOptions): Promise<T> {
+    let url = new String(urlAndConstructor.url) as string;
     if (!!options) {
-      urlAndConstructor.url = HttpHelper.buildUrlWithOptions(urlAndConstructor.url, options);
+      url = HttpHelper.buildUrlWithOptions(url, options);
     }
 
     let qs = !requestOptions
@@ -48,7 +49,7 @@ export class ZedGG {
 
     try {
       await this.rateLimiter.waitAll();
-      let result = await this.requester.get(urlAndConstructor.url, {
+      let result = await this.requester.get(url, {
         qs
       });
       this.handleResponse(result.date, result.statusCode, result.headers);
@@ -124,6 +125,20 @@ export class ZedGG {
     return result;
   }
 
+  private getMasterLeaguesByQueue = async (queue: Queue): Promise<LeagueList> => {
+    let result = await this.requestSingle(Endpoints.MasterLeagues.byQueue, {
+      queue: Queue[queue]
+    });
+    return result;
+  }
+
+  private getChallengerLeaguesByQueue = async (queue: Queue): Promise<LeagueList> => {
+    let result = await this.requestSingle(Endpoints.ChallengerLeagues.byQueue, {
+      queue: Queue[queue]
+    });
+    return result;
+  }
+
   private getMatchByMatchId = async (matchId: number): Promise<Match> => {
     let result = await this.requestSingle(Endpoints.Matches.byMatchId, {
       matchId
@@ -144,6 +159,11 @@ export class ZedGG {
     });
     return result;
   }
+
+  private getStaticDataVersions = async (): Promise<String[]> => {
+    let result = await this.requestMultiple(Endpoints.StaticData.versions);
+    return result;
+  }
   /* END REQUESTS */
 
   /* BEGIN DEFINITIONS */
@@ -159,7 +179,20 @@ export class ZedGG {
     by: {
       summonerId: this.getLeaguesBySummonerId
     }
+
   }
+
+  public masterLeagues = {
+    by: {
+      queue: this.getMasterLeaguesByQueue
+    }
+  };
+
+  public challengerLeagues = {
+    by: {
+      queue: this.getChallengerLeaguesByQueue
+    }
+  };
 
   public matches = {
     by: {
@@ -172,6 +205,10 @@ export class ZedGG {
       accountId: this.getMatchlistByAccountId,
       accountIdRecent: this.getMatchlistByAccountIdRecent
     }
+  }
+
+  public staticData = {
+    versions: this.getStaticDataVersions
   }
   /* END DEFINITIONS */
 } 

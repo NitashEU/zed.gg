@@ -1,8 +1,8 @@
-import { Converter, json } from '../../helpers';
-import { Mastery, Rune } from '../general';
+import { Converter, json } from './../../helpers';
+import { Mastery, Rune } from './../general';
 import { MatchSummoner, ParticipantStats, ParticipantTimeline } from '.';
 
-import { Tier } from '../../enums';
+import { Tier } from './../../enums';
 
 export class Participant {
   public participantId: number;

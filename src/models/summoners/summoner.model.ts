@@ -1,4 +1,4 @@
-import { Converter, json } from '../../helpers';
+import { Converter, json } from './../../helpers';
 
 export class Summoner {
   public id: number;

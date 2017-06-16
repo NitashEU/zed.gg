@@ -1,7 +1,7 @@
-import { Converter, json } from '../../helpers';
+import { Converter, json } from './../../helpers';
 
-import { Region } from '../../enums';
-import { platformIds } from '../../constants';
+import { Region } from './../../enums';
+import { platformIds } from './../../constants';
 
 export class MatchSummoner {
   public summonerName: string;

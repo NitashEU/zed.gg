@@ -1,5 +1,5 @@
-import { Converter, json } from '../../helpers';
-import { Queue, Tier } from '../../enums';
+import { Converter, json } from './../../helpers';
+import { Queue, Tier } from './../../enums';
 
 import { LeagueEntry } from '.';
 

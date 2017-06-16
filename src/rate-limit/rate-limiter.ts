@@ -39,6 +39,7 @@ export class RateLimiter {
   }
 
   public adjustToHeader(date: Date, headers: Headers): void { // TODO: This is SO nasty!
+    if (!headers) return;
     let map = new Map();
     let limits = Object.keys(headers).filter(key => this.rateLimitHeaders.has(key.toLowerCase())).map(key => headers[key]);
     limits.forEach(gLimits => {
