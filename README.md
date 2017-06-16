@@ -1,12 +1,12 @@
 # zed.gg
 
+Riot Api wrapper for Node.js written in typescript. RateLimit is handled with our built in logic and with the response headers (even async!). The first request is always sync, so we can adjust our RateLimit handler to the headers. `retry-after` case is not implemented yet. If you have any issues, just contact me on discord: `nitash#3613`!
+
 [![NPM](https://nodei.co/npm/zed.gg.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/zed.gg/) 
 
 [![Build Status](https://travis-ci.org/NitashEU/zed.gg.svg?branch=master)](https://travis-ci.org/NitashEU/zed.gg)
 
 `npm install zed.gg --save`
-
-Riot Api wrapper for Node.js written in typescript. RateLimit is handled with our built in logic and with the response headers (even async!). The first request is always sync, so we can adjust our RateLimit handler to the headers. `retry-after` case is not implemented yet.
 
 # Getting started
 
