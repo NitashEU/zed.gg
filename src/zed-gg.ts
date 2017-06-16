@@ -4,7 +4,7 @@ import * as request from 'request';
 
 import { CustomResponseException, Headers, LeagueList, Match, Matchlist, Summoner } from './models';
 import { HttpHelper, Requester, UrlAndConstructor, deserialize, deserializeArray } from './helpers';
-import { HttpStatusCode, Region } from './enums';
+import { HttpStatusCode, Queue, Region } from './enums';
 import { MatchlistByAccountIdOptions, RequestOptions } from './request-options';
 import { RateLimit, RateLimiter } from './rate-limit';
 
