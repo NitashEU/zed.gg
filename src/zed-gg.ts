@@ -124,6 +124,20 @@ export class ZedGG {
     return result;
   }
 
+  private getMasterLeaguesByQueue = async (queue: Queue): Promise<LeagueList> => {
+    let result = await this.requestSingle(Endpoints.MasterLeagues.byQueue, {
+      queue: Queue[queue]
+    });
+    return result;
+  }
+
+  private getChallengerLeaguesByQueue = async (queue: Queue): Promise<LeagueList> => {
+    let result = await this.requestSingle(Endpoints.ChallengerLeagues.byQueue, {
+      queue: Queue[queue]
+    });
+    return result;
+  }
+
   private getMatchByMatchId = async (matchId: number): Promise<Match> => {
     let result = await this.requestSingle(Endpoints.Matches.byMatchId, {
       matchId
@@ -159,7 +173,20 @@ export class ZedGG {
     by: {
       summonerId: this.getLeaguesBySummonerId
     }
+
   }
+
+  public masterLeagues = {
+    by: {
+      queue: this.getMasterLeaguesByQueue
+    }
+  };
+
+  public challengerLeagues = {
+    by: {
+      queue: this.getChallengerLeaguesByQueue
+    }
+  };
 
   public matches = {
     by: {

@@ -12,6 +12,20 @@ export namespace Endpoints { // TODO: Need to rework UrlAndConstructor creation
     export const bySummonerId = new UrlAndConstructor(baseUrl + 'by-summoner/{summonerId}', baseConstructor);
   }
 
+  export namespace MasterLeagues {
+    const baseUrl = 'lol/league/v3/masterleagues/';
+    const baseConstructor = LeagueList;
+
+    export const byQueue = new UrlAndConstructor(baseUrl + 'by-queue/{queue}', baseConstructor);
+  }
+
+  export namespace ChallengerLeagues {
+    const baseUrl = 'lol/league/v3/challengerleagues/';
+    const baseConstructor = LeagueList;
+
+    export const byQueue = new UrlAndConstructor(baseUrl + 'by-queue/{queue}', baseConstructor);
+  }
+
   export namespace Summoners {
     const baseUrl = 'lol/summoner/v3/summoners/';
     const baseConstructor = Summoner;
