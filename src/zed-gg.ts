@@ -12,9 +12,9 @@ import { Endpoints } from '.';
 import { platformIds } from './constants';
 
 export class ZedGG {
+  public region: Region;
   private requester: Requester;
   private rateLimiter: RateLimiter;
-  private region: Region;
   private apiKey: string;
 
   constructor(region: Region, apiKey: string, ...rateLimits: RateLimit[]) {
