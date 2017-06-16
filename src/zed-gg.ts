@@ -38,8 +38,9 @@ export class ZedGG {
   }
 
   private async requestSingle<T>(urlAndConstructor: UrlAndConstructor<T>, options?: any, requestOptions?: RequestOptions): Promise<T> {
+    let url = new String(urlAndConstructor.url) as string;
     if (!!options) {
-      urlAndConstructor.url = HttpHelper.buildUrlWithOptions(urlAndConstructor.url, options);
+      url = HttpHelper.buildUrlWithOptions(url, options);
     }
 
     let qs = !requestOptions
@@ -48,7 +49,7 @@ export class ZedGG {
 
     try {
       await this.rateLimiter.waitAll();
-      let result = await this.requester.get(urlAndConstructor.url, {
+      let result = await this.requester.get(url, {
         qs
       });
       this.handleResponse(result.date, result.statusCode, result.headers);
