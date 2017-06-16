@@ -49,4 +49,10 @@ export namespace Endpoints { // TODO: Need to rework UrlAndConstructor creation
     export const byAccountId = new UrlAndConstructor(baseUrl + 'by-account/{accountId}', baseConstructor);
     export const byAccountIdRecent = new UrlAndConstructor(baseUrl + 'by-account/{accountId}/recent', baseConstructor);
   }
+
+  export namespace StaticData {
+    const baseUrl = 'lol/static-data/v3/';
+
+    export const versions = new UrlAndConstructor(baseUrl + 'versions', String);
+  }
 }

@@ -158,6 +158,11 @@ export class ZedGG {
     });
     return result;
   }
+
+  private getStaticDataVersions = async (): Promise<String[]> => {
+    let result = await this.requestMultiple(Endpoints.StaticData.versions);
+    return result;
+  }
   /* END REQUESTS */
 
   /* BEGIN DEFINITIONS */
@@ -199,6 +204,10 @@ export class ZedGG {
       accountId: this.getMatchlistByAccountId,
       accountIdRecent: this.getMatchlistByAccountIdRecent
     }
+  }
+
+  public staticData = {
+    versions: this.getStaticDataVersions
   }
   /* END DEFINITIONS */
 } 
