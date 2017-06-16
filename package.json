@@ -32,6 +32,7 @@
     "chai": "^4.0.2",
     "mocha": "^3.4.2",
     "mocha-typescript": "^1.1.4",
-    "ts-node": "^3.0.6"
+    "ts-node": "^3.0.6",
+    "typescript": "^2.3.4"
   }
 }
