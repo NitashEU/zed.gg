@@ -1,5 +1,5 @@
-import { Converter, deserialize, json } from '../../helpers';
-import { LeagueMap, Queue, Region, Season } from '../../enums';
+import { Converter, deserialize, json } from './../../helpers';
+import { LeagueMap, Queue, Region, Season } from './../../enums';
 import { MatchSummoner, MatchTeam } from '.';
 
 export class Match {
