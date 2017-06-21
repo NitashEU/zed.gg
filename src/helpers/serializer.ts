@@ -1,5 +1,5 @@
 import { LeagueMap, Queue, Region, Season, Tier } from './../enums';
-import { isInstance, isPrimitiveOrPrimitiveClass, isType } from '.'
+import { isInstance, isPrimitiveOrPrimitiveClass, isType } from './'
 
 import { platformIds } from './../constants';
 

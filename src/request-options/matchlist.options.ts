@@ -1,6 +1,6 @@
 import { Queue, Season } from './../enums';
 
-import { RequestOptions } from '.';
+import { RequestOptions } from './';
 
 export class MatchlistByAccountIdOptions implements RequestOptions {
   public season: Season;

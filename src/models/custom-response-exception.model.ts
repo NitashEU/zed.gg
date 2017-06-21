@@ -1,4 +1,4 @@
-import { Headers } from '.';
+import { Headers } from './';
 import { HttpStatusCode } from './../enums';
 
 export class CustomResponseException {

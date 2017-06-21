@@ -2,7 +2,7 @@ import { CustomConverter, deserialize } from './serializer';
 import { LeagueMap, Queue, Region, Season, Tier } from './../enums';
 import { MatchSummoner, MatchTeam, Participant } from './../models';
 
-import { isType } from '.';
+import { isType } from './';
 import { platformIds } from './../constants';
 
 export namespace Converter {

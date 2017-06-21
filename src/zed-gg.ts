@@ -8,7 +8,7 @@ import { HttpStatusCode, Queue, Region } from './enums';
 import { MatchlistByAccountIdOptions, RequestOptions } from './request-options';
 import { RateLimit, RateLimiter } from './rate-limit';
 
-import { Endpoints } from '.';
+import { Endpoints } from './';
 import { platformIds } from './constants';
 
 export class ZedGG {
