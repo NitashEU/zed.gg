@@ -1,7 +1,7 @@
 import { Mutex, MutexInterface } from 'async-mutex';
 
 import { Headers } from './../models';
-import { RateLimit } from '.';
+import { RateLimit } from './';
 import { rateLimitHeaders } from './../constants';
 
 export class RateLimiter {

@@ -1,5 +1,5 @@
 import { Converter, json } from './../../helpers';
-import { MatchBan, Participant } from '.';
+import { MatchBan, Participant } from './';
 
 export class MatchTeam {
   public teamId: number;

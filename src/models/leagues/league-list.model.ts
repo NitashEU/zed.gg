@@ -1,7 +1,7 @@
 import { Converter, json } from './../../helpers';
 import { Queue, Tier } from './../../enums';
 
-import { LeagueEntry } from '.';
+import { LeagueEntry } from './';
 
 export class LeagueList {
   public name: string;

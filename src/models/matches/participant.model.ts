@@ -1,6 +1,6 @@
 import { Converter, json } from './../../helpers';
 import { Mastery, Rune } from './../general';
-import { MatchSummoner, ParticipantStats, ParticipantTimeline } from '.';
+import { MatchSummoner, ParticipantStats, ParticipantTimeline } from './';
 
 import { Tier } from './../../enums';
 

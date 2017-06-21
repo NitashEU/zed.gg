@@ -1,3 +1,4 @@
 src/
+*.spec.js
 tsconfig.json
 .vscode/

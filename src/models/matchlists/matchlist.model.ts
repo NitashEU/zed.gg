@@ -1,4 +1,4 @@
-import { MatchReference } from '.';
+import { MatchReference } from './';
 import { json } from './../../helpers';
 
 export class Matchlist {

@@ -1,11 +1,11 @@
 import * as async from 'async';
 import * as chai from 'chai';
 
-import { RateLimit, RateLimiter } from './../../rate-limit';
+import { RateLimit, RateLimiter } from './../rate-limit';
 import { slow, suite, test, timeout } from "mocha-typescript";
 
-import { asyncForEach } from './../../helpers/general';
-import { rateLimitHeaders } from './../../constants/rate-limit-headers.constant';
+import { asyncForEach } from './../helpers/general';
+import { rateLimitHeaders } from './../constants/rate-limit-headers.constant';
 
 @suite class RateLimiterTest {
   public static before() {

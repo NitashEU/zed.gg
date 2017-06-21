@@ -1,7 +1,7 @@
 import { Converter, json } from './../../helpers';
 import { Queue, Tier } from './../../enums';
 
-import { MiniSeries } from '.';
+import { MiniSeries } from './';
 
 export class LeagueEntry {
   @json('rank', Converter.RankConverter)
