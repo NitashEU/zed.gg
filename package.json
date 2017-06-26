@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "pretest": "tsc",
-    "test": "mocha -r ts-node/register src/**/*.spec.ts",
+    "test": "mocha -r ts-node/register test/**/*.spec.ts",
     "dev-test-watch": "mocha-typescript-watch dist/test/**/*.spec.js"
   },
   "author": {
