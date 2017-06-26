@@ -62,7 +62,7 @@ export class RateLimiter {
         if (rl.seconds === key) {
           let currentQueueLength = rl.getCurrentQueueLength();
           if (highestValue > currentQueueLength) {
-            console.log('adding ' + (highestValue - currentQueueLength) + ' more to ' + key);
+            // console.log('adding ' + (highestValue - currentQueueLength) + ' more to ' + key);
             for (var i = 0; i < highestValue - currentQueueLength; i++) {
               rl.addRequest(date);
             }
