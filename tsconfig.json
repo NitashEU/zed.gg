@@ -4,7 +4,7 @@
     "experimentalDecorators": true,
     "target": "es5",
     "outDir": "dist",
-    "rootDir": "src",
+    "rootDir": ".",
     "declaration": true,
     "sourceMap": true,
     "lib": ["es5", "es6"]
@@ -13,7 +13,6 @@
     "src/**/*"
   ],
   "exclude": [
-    "node_modules",
-    "**/*.spec.ts"
+    "node_modules"
   ]
 }
