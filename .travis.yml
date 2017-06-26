@@ -1,13 +1,9 @@
 language: node_js
-branches:
-  only:
-  - master
 node_js:
   - "6"
   - "7"
   - "8"
 before_script:
   - npm install typescript -g
-  - npm install
 script:
   - npm test
